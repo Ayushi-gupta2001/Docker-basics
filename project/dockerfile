@@ -1,0 +1,13 @@
+FROM node:14-alpine
+
+WORKDIR /home
+
+## whenever there is a change into index.js file, we have to rebuild the image and container. while building the image "npm install"
+## command will run again, which is not required because we haven't made any changes into package.json file.
+## to sav execution time, we can actually do it like below instructions.
+COPY ./package.json ./   
+RUN npm install
+
+COPY ./ ./
+
+CMD ["npm", "start"]
